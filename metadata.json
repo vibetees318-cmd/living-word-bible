@@ -1,0 +1,6 @@
+{
+  "name": "Living Word: Jesus AI",
+  "description": "Interactive sacred Bible reader with an animated AI Avatar of Jesus Christ that recites scripture out loud across multiple languages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -999,8 +999,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'কাথলিক প্ৰাৰ্থনা'
   },
   Bengali: {
-    appTitle: 'জীবন্ত বাক্য: যীশু AI',
-    tagline: 'পবিত্র বাইবেল - যীশু AI এর কন্ঠে',
+    appTitle: 'জীবন্ত বাক্য: পবিত্র বাইবেল',
+    tagline: 'পবিত্র বাইবেল - যীশু পবিত্র কণ্ঠে',
     readBible: 'বাইবেল পড়ুন',
     dailyBlessing: 'দৈনিক আশীর্বাদ',
     bookmarks: 'সংরক্ষিত পদ',
@@ -1036,8 +1036,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'ক্যাথলিক প্রার্থনা'
   },
   Nepali: {
-    appTitle: 'जीवित वचन: येशू AI',
-    tagline: 'पवित्र बाइबल - येशू AI द्वारा वाचन',
+    appTitle: 'जीवित वचन: पवित्र बाइबल',
+    tagline: 'पवित्र बाइबल - येशू भक्तिमय वाचन',
     readBible: 'बाइबल पढ्नुहोस्',
     dailyBlessing: 'दैनिक आशिष्',
     bookmarks: 'पदहरू र नोटहरू',
@@ -1073,8 +1073,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'क्याथोलिक प्रार्थना'
   },
   Urdu: {
-    appTitle: 'زندہ کلام: یسوع AI',
-    tagline: 'مقدس بائبل - یسوع AI کی آواز میں',
+    appTitle: 'زندہ کلام: مقدس بائبل',
+    tagline: 'مقدس بائبل - مقدس آواز میں تلاوت',
     readBible: 'بائبل پڑھیں',
     dailyBlessing: 'روزانہ کی برکت',
     bookmarks: 'بک مارکس اور نوٹس',
@@ -1110,8 +1110,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'کیتھولک دعائیں'
   },
   Odia: {
-    appTitle: 'ଜୀବନ୍ତ ବାକ୍ୟ: ଯୀଶୁ AI',
-    tagline: 'ପବିତ୍ର ବାଇବଲ - ଯୀଶୁ AI ସ୍ୱରରେ',
+    appTitle: 'ଜୀବନ୍ତ ବାକ୍ୟ: ପବିତ୍ର ବାଇବଲ',
+    tagline: 'ପବିତ୍ର ବାଇବଲ - ଯୀଶୁ ପବିତ୍ର ସ୍ୱରରେ',
     readBible: 'ବାଇବଲ ପଢନ୍ତୁ',
     dailyBlessing: 'ଦୈନିକ ଆଶୀର୍ବାଦ',
     bookmarks: 'ସାଇତା ପଦଗୁଡ଼ିକ',
@@ -1147,8 +1147,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'କ୍ୟାଥୋଲିକ ପ୍ରାର୍ଥନା'
   },
   Tamil: {
-    appTitle: 'ஜீவனுள்ள வார்த்தை: இயேசு AI',
-    tagline: 'பரிசுத்த வேதாகமம் - இயேசு AI குரலில்',
+    appTitle: 'ஜீவனுள்ள வார்த்தை: பரிசுத்த வேதாகமம்',
+    tagline: 'பரிசுத்த வேதாகமம் - இயேசு புனித குரலில்',
     readBible: 'வேதாகமம் வாசிக்க',
     dailyBlessing: 'தினசரி ஆசீர்வாதம்',
     bookmarks: 'குறிப்புகள்',
@@ -1184,8 +1184,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'கத்தோலிக்க ஜெபங்கள்'
   },
   Telugu: {
-    appTitle: 'జీవ వాక్యము: యేసు AI',
-    tagline: 'పరిశుద్ధ గ్రంథము - యేసు AI స్వరములో',
+    appTitle: 'జీవ వాక్యము: పరిశుద్ధ గ్రంథము',
+    tagline: 'పరిశుద్ధ గ్రంథము - యేసు పవిత్ర స్వరములో',
     readBible: 'బైబిల్ చదవండి',
     dailyBlessing: 'దినవారీ దీవెన',
     bookmarks: 'గుర్తుంచుకున్నవి',
@@ -1221,8 +1221,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'కథోలిక్ ప్రార్థనలు'
   },
   Malayalam: {
-    appTitle: 'ജീവന്റെ വചനം: യേശു AI',
-    tagline: 'വിശുദ്ധ ബൈബിൾ - യേശു AI ശബ്ദത്തിൽ',
+    appTitle: 'ജീവന്റെ വചനം: വിശുദ്ധ ബൈബിൾ',
+    tagline: 'വിശുദ്ധ ബൈബിൾ - യേശു വിശുദ്ധ ശബ്ദത്തിൽ',
     readBible: 'ബൈബിൾ വായിക്കുക',
     dailyBlessing: 'ദിന അനുഗ്രഹം',
     bookmarks: 'പ്രിയപ്പെട്ടവ',
@@ -1258,8 +1258,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'കത്തോലിക്കാ പ്രാർത്ഥനകൾ'
   },
   Kannada: {
-    appTitle: 'ಜೀವದ ವಾಕ್ಯ: ಯೇಸು AI',
-    tagline: 'ಪವಿತ್ರ ಬೈಬಲ್ - ಯೇಸು AI ಧ್ವನಿಯಲ್ಲಿ',
+    appTitle: 'ಜೀವದ ವಾಕ್ಯ: ಪವಿತ್ರ ಬೈಬಲ್',
+    tagline: 'ಪವಿತ್ರ ಬೈಬಲ್ - ಯೇಸು ಪವಿತ್ರ ಧ್ವನಿಯಲ್ಲಿ',
     readBible: 'ಬೈಬಲ್ ಓದಿ',
     dailyBlessing: 'ದೈನಂದಿನ ಆಶೀರ್ವಾದ',
     bookmarks: 'ಮೆಚ್ಚಿನವುಗಳು',
@@ -1295,8 +1295,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'ಕ್ಯಾಥೊಲಿಕ್ ಪ್ರಾರ್ಥನೆಗಳು'
   },
   Punjabi: {
-    appTitle: 'ਜੀਵਨ ਦਾ ਬਚਨ: ਯਿਸੂ AI',
-    tagline: 'ਪਵਿੱਤਰ ਬਾਈਬਲ - ਯਿਸੂ AI ਦੀ ਆਵਾਜ਼ ਵਿੱਚ',
+    appTitle: 'ਜੀਵਨ ਦਾ ਬਚਨ: ਪਵਿੱਤਰ ਬਾਈਬਲ',
+    tagline: 'ਪਵਿੱਤਰ ਬਾਈਬਲ - ਯਿਸੂ ਪਵਿੱਤਰ ਆਵਾਜ਼ ਵਿੱਚ',
     readBible: 'ਬਾਈਬਲ ਪੜ੍ਹੋ',
     dailyBlessing: 'ਰੋਜ਼ਾਨਾ ਅਸੀਸ',
     bookmarks: 'ਸੁਰੱਖਿਅਤ ਪੰਨੇ',
@@ -1332,8 +1332,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'ਕੈਥੋਲਿਕ ਪ੍ਰਾਰਥਨਾਵਾਂ'
   },
   Gujarati: {
-    appTitle: 'જીવંત વચન: ઈસુ AI',
-    tagline: 'પવિત્ર બાઇબલ - ઈસુ AI ના અવાજમાં',
+    appTitle: 'જીવંત વચન: પવિત્ર બાઇબલ',
+    tagline: 'પવિત્ર બાઇબલ - ઈસુ પવિત્ર અવાજમાં',
     readBible: 'બાઇબલ વાંચો',
     dailyBlessing: 'દૈનિક આશીર્વાદ',
     bookmarks: 'બુકમાર્ક્સ',
@@ -1369,8 +1369,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'કેથોલિક પ્રાર્થનાઓ'
   },
   Marathi: {
-    appTitle: 'जिवंत वचन: येशू AI',
-    tagline: 'पवित्र शास्त्र - येशू AI च्या आवाजात',
+    appTitle: 'जिवंत वचन: पवित्र बाइबल',
+    tagline: 'पवित्र शास्त्र - येशू पवित्र आवाजात',
     readBible: 'बायबल वाचा',
     dailyBlessing: 'दैनिक आशीर्वाद',
     bookmarks: 'जतन केलेले वचने',
@@ -1406,8 +1406,8 @@ export const UI_TRANSLATIONS: Record<LanguageCode, {
     rcPrayers: 'कॅथलिक प्रार्थना'
   },
   Spanish: {
-    appTitle: 'Palabra Viva: Jesús AI',
-    tagline: 'Las Sagradas Escrituras Recitadas por Jesús AI',
+    appTitle: 'Palabra Viva: Santa Biblia',
+    tagline: 'Las Sagradas Escrituras Recitadas con Reverencia',
     readBible: 'Leer la Biblia',
     dailyBlessing: 'Bendición Diaria',
     bookmarks: 'Marcadores y Notas',

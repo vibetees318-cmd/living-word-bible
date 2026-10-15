@@ -14,6 +14,8 @@ import { BookmarksView, SavedBookmark } from './components/BookmarksView';
 import { AudioSettingsView } from './components/AudioSettingsView';
 import { BibleVideosView } from './components/BibleVideosView';
 import { VerseShareModal } from './components/VerseShareModal';
+import { AboutDeveloperModal } from './components/AboutDeveloperModal';
+import { Footer } from './components/Footer';
 import { BottomNav } from './components/BottomNav';
 import { BIBLE_BOOKS, getChapterContent, Verse, ChapterData, LanguageCode, JESUS_AVATAR_IMAGE_URL } from './data/bibleData';
 import { BibleSpeechController, isNativeScript } from './utils/speechEngine';
@@ -97,6 +99,9 @@ export default function App() {
 
   // Share Modal State
   const [shareModalVerse, setShareModalVerse] = useState<{ verse: Verse; book: string; chapter: number } | null>(null);
+
+  // About Developer Modal State
+  const [aboutDeveloperOpen, setAboutDeveloperOpen] = useState(false);
 
   // Initialize Speech Engine Controller
   const speechControllerRef = useRef<BibleSpeechController | null>(null);
@@ -366,6 +371,7 @@ export default function App() {
         language={language}
         setLanguage={setLanguage}
         onSelectBookAndChapter={handleSelectBookAndChapter}
+        onOpenAboutDeveloper={() => setAboutDeveloperOpen(true)}
       />
 
       {/* Main Responsive Content Area */}
@@ -474,6 +480,12 @@ export default function App() {
         )}
       </main>
 
+      {/* Sacred App Footer with Developer Credits & Vibe Tees Branding */}
+      <Footer
+        onOpenAboutDeveloper={() => setAboutDeveloperOpen(true)}
+        onNavigateTab={setCurrentTab}
+      />
+
       {/* Share Verse Modal Dialog */}
       {shareModalVerse && (
         <VerseShareModal
@@ -483,6 +495,12 @@ export default function App() {
           onClose={() => setShareModalVerse(null)}
         />
       )}
+
+      {/* About Developer Modal Dialog */}
+      <AboutDeveloperModal
+        isOpen={aboutDeveloperOpen}
+        onClose={() => setAboutDeveloperOpen(false)}
+      />
 
       {/* Responsive Bottom Navigation Bar for Mobile */}
       <BottomNav

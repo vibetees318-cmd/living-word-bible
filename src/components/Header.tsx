@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Sparkles, BookOpen, Volume2, Globe, X } from 'lucide-react';
+import { Search, Sparkles, BookOpen, Volume2, Globe, X, Menu, Code2, Shirt, Tv } from 'lucide-react';
 import { BIBLE_BOOKS, CURATED_CHAPTERS, UI_TRANSLATIONS, SUPPORTED_LANGUAGES, LanguageCode } from '../data/bibleData';
 
 interface HeaderProps {
@@ -8,6 +8,7 @@ interface HeaderProps {
   language: LanguageCode;
   setLanguage: (lang: LanguageCode) => void;
   onSelectBookAndChapter: (bookId: string, chapter: number) => void;
+  onOpenAboutDeveloper?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -15,10 +16,12 @@ export const Header: React.FC<HeaderProps> = ({
   setCurrentTab,
   language,
   setLanguage,
-  onSelectBookAndChapter
+  onSelectBookAndChapter,
+  onOpenAboutDeveloper
 }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const t = UI_TRANSLATIONS[language] || UI_TRANSLATIONS.English;
 
@@ -174,13 +177,13 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </nav>
 
-          {/* Zone 3: Primary Action & Utilities (Language Selector & Quick Search) */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Zone 3: Primary Action & Utilities (Language Selector & Quick Search & Menu Drawer) */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {/* Quick Search Button */}
             <button
               onClick={() => setSearchOpen(true)}
               aria-label="Search scripture"
-              className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#574D3F] bg-[#F4EFEA] hover:bg-[#EBE4D8] border border-[#DDD5C5] rounded-lg transition-colors whitespace-nowrap shrink-0 shadow-2xs"
+              className="flex items-center gap-2 px-2.5 sm:px-3 py-2 text-xs font-medium text-[#574D3F] bg-[#F4EFEA] hover:bg-[#EBE4D8] border border-[#DDD5C5] rounded-lg transition-colors whitespace-nowrap shrink-0 shadow-2xs cursor-pointer"
             >
               <Search className="w-4 h-4 text-[#8A795D]" />
               <span className="hidden sm:inline">Search Scripture...</span>
@@ -192,7 +195,7 @@ export const Header: React.FC<HeaderProps> = ({
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value as LanguageCode)}
-                className="pl-8 pr-3 py-1.5 text-xs font-semibold text-[#2C2C2C] bg-[#F4EFEA] border border-[#DDD5C5] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37] cursor-pointer hover:bg-[#EBE4D8] transition-colors appearance-none max-w-[155px] sm:max-w-none truncate"
+                className="pl-8 pr-3 py-1.5 text-xs font-semibold text-[#2C2C2C] bg-[#F4EFEA] border border-[#DDD5C5] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37] cursor-pointer hover:bg-[#EBE4D8] transition-colors appearance-none max-w-[125px] sm:max-w-none truncate"
                 aria-label="Select recitation language"
               >
                 {SUPPORTED_LANGUAGES.map((lang) => (
@@ -202,9 +205,239 @@ export const Header: React.FC<HeaderProps> = ({
                 ))}
               </select>
             </div>
+
+            {/* Navigation Drawer Menu Toggle Button */}
+            <button
+              onClick={() => setDrawerOpen(true)}
+              aria-label="Open navigation drawer"
+              title="Navigation Menu & About Developer"
+              className="p-2 text-[#574D3F] hover:text-[#1C1917] hover:bg-[#EBE4D8] border border-[#DDD5C5] rounded-lg transition-colors cursor-pointer flex items-center gap-1.5"
+            >
+              <Menu className="w-4 h-4 text-[#8A795D]" />
+              <span className="hidden lg:inline text-xs font-medium">Menu</span>
+            </button>
           </div>
         </div>
       </header>
+
+      {/* Slide-out Navigation Drawer */}
+      {drawerOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          {/* Backdrop Blur Overlay */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity duration-300 animate-in fade-in"
+            onClick={() => setDrawerOpen(false)}
+          />
+
+          {/* Drawer Container Panel */}
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div className="w-80 sm:w-96 max-w-full bg-[#FDFBF7] border-l border-[#EAE3D2] shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300">
+              {/* Drawer Top Header */}
+              <div className="p-4 sm:p-5 border-b border-[#EAE3D2] flex items-center justify-between bg-[#F8F4EC]">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#E3C363] via-[#D4AF37] to-[#F3E5AB] flex items-center justify-center shadow-xs text-[#1A1813]">
+                    <svg className="w-5 h-5 text-[#1A1813]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="9" strokeOpacity="0.4" strokeDasharray="2 2" />
+                      <path d="M12 3v3M12 18v3M3 12h3M18 12h3" strokeOpacity="0.6" />
+                      <path d="M16 12a4 4 0 0 0-8 0c0 3 4 7 4 7s4-4 4-7z" fill="currentColor" fillOpacity="0.15" />
+                      <path d="M12 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-cinzel text-base font-bold text-[#1C1917]">
+                      Living Word
+                    </h3>
+                    <p className="text-[11px] font-sans-ui uppercase tracking-wider text-[#8A795D]">
+                      Holy Bible Companion
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setDrawerOpen(false)}
+                  className="p-1.5 text-[#8A795D] hover:text-[#1C1917] hover:bg-[#EAE3D2] rounded-lg transition-colors cursor-pointer"
+                  aria-label="Close navigation drawer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Drawer Navigation Links */}
+              <div className="p-4 space-y-5 overflow-y-auto flex-1 font-sans-ui">
+                <div>
+                  <div className="text-[11px] uppercase tracking-wider text-[#8A795D] font-bold px-3 mb-2">
+                    Scripture & Worship
+                  </div>
+                  <nav className="space-y-1">
+                    <button
+                      onClick={() => {
+                        setCurrentTab('reader');
+                        setDrawerOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+                        currentTab === 'reader'
+                          ? 'bg-[#EFE8DA] text-[#1C1917] font-semibold border border-[#D5C9B3]'
+                          : 'text-[#574D3F] hover:bg-[#F4EFEA]'
+                      }`}
+                    >
+                      <BookOpen className="w-4 h-4 text-[#C5A028]" />
+                      <span>{t.readBible}</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setCurrentTab('videos');
+                        setDrawerOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+                        currentTab === 'videos'
+                          ? 'bg-[#EFE8DA] text-[#1C1917] font-semibold border border-[#D5C9B3]'
+                          : 'text-[#574D3F] hover:bg-[#F4EFEA]'
+                      }`}
+                    >
+                      <Tv className="w-4 h-4 text-[#C5A028]" />
+                      <span>📺 Bible Videos & Stories</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setCurrentTab('prayers');
+                        setDrawerOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+                        currentTab === 'prayers'
+                          ? 'bg-[#EFE8DA] text-[#1C1917] font-semibold border border-[#D5C9B3]'
+                          : 'text-[#574D3F] hover:bg-[#F4EFEA]'
+                      }`}
+                    >
+                      <span>📿</span>
+                      <span>{t.rcPrayers}</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setCurrentTab('blessing');
+                        setDrawerOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+                        currentTab === 'blessing'
+                          ? 'bg-[#EFE8DA] text-[#1C1917] font-semibold border border-[#D5C9B3]'
+                          : 'text-[#574D3F] hover:bg-[#F4EFEA]'
+                      }`}
+                    >
+                      <Sparkles className="w-4 h-4 text-[#C5A028]" />
+                      <span>{t.dailyBlessing}</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setCurrentTab('bookmarks');
+                        setDrawerOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+                        currentTab === 'bookmarks'
+                          ? 'bg-[#EFE8DA] text-[#1C1917] font-semibold border border-[#D5C9B3]'
+                          : 'text-[#574D3F] hover:bg-[#F4EFEA]'
+                      }`}
+                    >
+                      <span>🔖</span>
+                      <span>{t.bookmarks}</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setCurrentTab('settings');
+                        setDrawerOpen(false);
+                      }}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+                        currentTab === 'settings'
+                          ? 'bg-[#EFE8DA] text-[#1C1917] font-semibold border border-[#D5C9B3]'
+                          : 'text-[#574D3F] hover:bg-[#F4EFEA]'
+                      }`}
+                    >
+                      <Volume2 className="w-4 h-4 text-[#C5A028]" />
+                      <span>{t.audioSettings}</span>
+                    </button>
+                  </nav>
+                </div>
+
+                {/* DEDICATED ABOUT DEVELOPER SECTION IN NAVIGATION DRAWER */}
+                <div className="pt-2 border-t border-[#EAE3D2]">
+                  <div className="text-[11px] uppercase tracking-wider text-[#8A795D] font-bold px-3 mb-2 flex items-center justify-between">
+                    <span>Creator & Brand Partner</span>
+                    <span className="text-[#C5A028]">✦</span>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-gradient-to-br from-[#FAF5EC] to-[#F3EBE0] border border-[#DDD3BF] shadow-xs space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A231C] to-[#161310] border border-[#D4AF37] flex items-center justify-center text-[#F5D76E] font-cinzel font-bold text-sm shadow-sm shrink-0">
+                        PB
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-1">
+                          <span className="font-cinzel text-xs sm:text-sm font-bold text-[#1C1917] truncate">
+                            Pranjit Baghwar
+                          </span>
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#FAF4E6] text-[#8C6D1F] border border-[#D4AF37]/40 shrink-0">
+                            Version 1.0.0
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-[#7A6C59] font-medium leading-tight mt-0.5">
+                          Designed & Developed by Pranjit Baghwar
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Vibe Tees Branding Chip */}
+                    <div className="p-2.5 rounded-lg bg-[#2A231C] text-white border border-[#4A3E2D] flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Shirt className="w-3.5 h-3.5 text-[#F5D76E]" />
+                        <span className="text-xs font-cinzel font-bold text-[#F5D76E]">
+                          Vibe Tees
+                        </span>
+                      </div>
+                      <a
+                        href="https://vibetees.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] text-[#D4AF37] hover:underline font-semibold"
+                      >
+                        Visit Studio ↗
+                      </a>
+                    </div>
+
+                    {/* Button to open About Developer Modal */}
+                    <button
+                      onClick={() => {
+                        setDrawerOpen(false);
+                        if (onOpenAboutDeveloper) {
+                          onOpenAboutDeveloper();
+                        }
+                      }}
+                      className="w-full py-2 px-3 rounded-lg bg-[#D4AF37] hover:bg-[#C5A028] text-[#1C1917] text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      <Code2 className="w-3.5 h-3.5" />
+                      <span>About Developer & Vibe Tees</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Drawer Footer with Version 1.0.0 */}
+              <div className="p-4 border-t border-[#EAE3D2] bg-[#F8F4EC] text-center text-xs text-[#8A795D]">
+                <div className="flex items-center justify-center gap-1.5 font-cinzel font-semibold text-[#5A5042] text-[11px]">
+                  <span>Living Word Holy Bible</span>
+                  <span>·</span>
+                  <span className="font-bold text-[#8C6D1F] bg-[#FAF4E6] px-2 py-0.2 rounded border border-[#D4AF37]/30">Version 1.0.0</span>
+                </div>
+                <div className="text-[10px] text-[#A8987E] mt-1">
+                  Developer: Pranjit Baghwar · AMDG
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Search Modal Flyout */}
       {searchOpen && (

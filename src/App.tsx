@@ -12,6 +12,7 @@ import { DailyBlessingView } from './components/DailyBlessingView';
 import { CatholicPrayersView } from './components/CatholicPrayersView';
 import { BookmarksView, SavedBookmark } from './components/BookmarksView';
 import { AudioSettingsView } from './components/AudioSettingsView';
+import { BibleVideosView } from './components/BibleVideosView';
 import { VerseShareModal } from './components/VerseShareModal';
 import { BottomNav } from './components/BottomNav';
 import { BIBLE_BOOKS, getChapterContent, Verse, ChapterData, LanguageCode, JESUS_AVATAR_IMAGE_URL } from './data/bibleData';
@@ -56,7 +57,7 @@ const INITIAL_BOOKMARKS: SavedBookmark[] = [
 
 export default function App() {
   // Navigation & Tab State
-  const [currentTab, setCurrentTab] = useState<'reader' | 'blessing' | 'prayers' | 'bookmarks' | 'settings'>('reader');
+  const [currentTab, setCurrentTab] = useState<'reader' | 'videos' | 'blessing' | 'prayers' | 'bookmarks' | 'settings'>('reader');
 
   // Jesus Christ Sacred Portrait State (reverent portrait of Jesus Christ)
   const [avatarImageUrl, setAvatarImageUrl] = useState<string>(jesusPortrait || JESUS_AVATAR_IMAGE_URL);
@@ -415,6 +416,13 @@ export default function App() {
               onShareVerse={handleShareVerse}
             />
           </>
+        )}
+
+        {currentTab === 'videos' && (
+          <BibleVideosView
+            language={language}
+            onReadInBible={handleSelectBookAndChapter}
+          />
         )}
 
         {currentTab === 'prayers' && (

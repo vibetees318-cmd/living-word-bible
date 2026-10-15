@@ -3,8 +3,8 @@ import { Search, Sparkles, BookOpen, Volume2, Globe, X } from 'lucide-react';
 import { BIBLE_BOOKS, CURATED_CHAPTERS, UI_TRANSLATIONS, SUPPORTED_LANGUAGES, LanguageCode } from '../data/bibleData';
 
 interface HeaderProps {
-  currentTab: 'reader' | 'blessing' | 'prayers' | 'bookmarks' | 'settings';
-  setCurrentTab: (tab: 'reader' | 'blessing' | 'prayers' | 'bookmarks' | 'settings') => void;
+  currentTab: 'reader' | 'videos' | 'blessing' | 'prayers' | 'bookmarks' | 'settings';
+  setCurrentTab: (tab: 'reader' | 'videos' | 'blessing' | 'prayers' | 'bookmarks' | 'settings') => void;
   language: LanguageCode;
   setLanguage: (lang: LanguageCode) => void;
   onSelectBookAndChapter: (bookId: string, chapter: number) => void;
@@ -106,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Zone 2: Navigation Links (single line, clean text, desktop) */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-[#574D3F]">
+          <nav className="hidden md:flex items-center gap-5 lg:gap-6 text-sm font-medium text-[#574D3F]">
             <button
               onClick={() => setCurrentTab('reader')}
               className={`transition-colors whitespace-nowrap shrink-0 pb-1 border-b-2 cursor-pointer ${
@@ -117,6 +117,20 @@ export const Header: React.FC<HeaderProps> = ({
             >
               {t.readBible}
             </button>
+
+            {/* 📺 Bible Videos tab */}
+            <button
+              onClick={() => setCurrentTab('videos')}
+              className={`transition-colors whitespace-nowrap shrink-0 pb-1 border-b-2 cursor-pointer flex items-center gap-1.5 ${
+                currentTab === 'videos'
+                  ? 'text-[#1C1917] font-semibold border-[#D4AF37]'
+                  : 'border-transparent hover:text-[#1C1917]'
+              }`}
+            >
+              <span>📺</span>
+              <span>Bible Videos</span>
+            </button>
+
             <button
               onClick={() => setCurrentTab('prayers')}
               className={`transition-colors whitespace-nowrap shrink-0 pb-1 border-b-2 cursor-pointer flex items-center gap-1.5 ${

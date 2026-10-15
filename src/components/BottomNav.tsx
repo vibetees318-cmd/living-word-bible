@@ -1,10 +1,10 @@
 import React from 'react';
-import { BookOpen, Sparkles, Bookmark, Settings } from 'lucide-react';
+import { BookOpen, Sparkles, Bookmark, Settings, Tv } from 'lucide-react';
 import { UI_TRANSLATIONS, LanguageCode } from '../data/bibleData';
 
 interface BottomNavProps {
-  currentTab: 'reader' | 'blessing' | 'prayers' | 'bookmarks' | 'settings';
-  setCurrentTab: (tab: 'reader' | 'blessing' | 'prayers' | 'bookmarks' | 'settings') => void;
+  currentTab: 'reader' | 'videos' | 'blessing' | 'prayers' | 'bookmarks' | 'settings';
+  setCurrentTab: (tab: 'reader' | 'videos' | 'blessing' | 'prayers' | 'bookmarks' | 'settings') => void;
   language: LanguageCode;
   bookmarksCount: number;
 }
@@ -19,7 +19,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
 
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-md border-t border-[#EAE3D2] px-1 py-1.5 shadow-lg">
-      <div className="grid grid-cols-5 gap-0.5 max-w-lg mx-auto">
+      <div className="grid grid-cols-6 gap-0.5 max-w-lg mx-auto">
         {/* Tab 1: Read Bible */}
         <button
           onClick={() => setCurrentTab('reader')}
@@ -29,9 +29,24 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               : 'text-[#7D705C] hover:text-[#1C1917]'
           }`}
         >
-          <BookOpen className={`w-4.5 h-4.5 ${currentTab === 'reader' ? 'text-[#C5A028]' : ''}`} />
+          <BookOpen className={`w-4 h-4 ${currentTab === 'reader' ? 'text-[#C5A028]' : ''}`} />
           <span className="text-[9px] font-sans-ui mt-0.5 truncate w-full text-center">
             {t.readBible}
+          </span>
+        </button>
+
+        {/* Tab 2: 📺 Bible Videos */}
+        <button
+          onClick={() => setCurrentTab('videos')}
+          className={`flex flex-col items-center justify-center py-1.5 px-0.5 rounded-xl transition-colors cursor-pointer ${
+            currentTab === 'videos'
+              ? 'text-[#1C1917] font-bold bg-[#F4EFEA]'
+              : 'text-[#7D705C] hover:text-[#1C1917]'
+          }`}
+        >
+          <span className="text-sm leading-none">📺</span>
+          <span className="text-[9px] font-sans-ui mt-0.5 truncate w-full text-center">
+            Videos
           </span>
         </button>
 

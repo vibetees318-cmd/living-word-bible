@@ -162,16 +162,20 @@ export const AboutDeveloperModal: React.FC<AboutDeveloperModalProps> = ({ isOpen
           </div>
         </div>
 
-        {/* Modal Footer */}
-        <div className="p-4 border-t border-[#E8DEC9] bg-[#FAF6EE] flex items-center justify-between text-xs text-[#8A795D]">
-          <div className="flex items-center gap-1.5 font-medium">
-            <span>Living Word Holy Bible</span>
+        {/* Modal Footer with Version 1.0.0 & Developer Credit */}
+        <div className="p-4 border-t border-[#E8DEC9] bg-[#FAF6EE] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#8A795D]">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 font-medium">
+            <span className="font-semibold text-[#1C1917]">Living Word Holy Bible</span>
             <span>·</span>
-            <span className="font-bold text-[#8C6D1F] bg-[#FAF4E6] px-2 py-0.5 rounded border border-[#D4AF37]/30">Version 1.0.0</span>
+            <span className="font-bold text-[#8C6D1F] bg-[#FAF4E6] px-2.5 py-0.5 rounded-full border border-[#D4AF37]/40 shadow-2xs">
+              Version 1.0.0
+            </span>
+            <span>·</span>
+            <span className="text-[#6D5D48] font-medium">Dev: Pranjit Baghwar</span>
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-[#2A231C] hover:bg-[#3D3325] text-white font-medium transition-colors cursor-pointer"
+            className="px-4 py-1.5 rounded-lg bg-[#2A231C] hover:bg-[#3D3325] text-white font-medium transition-colors cursor-pointer w-full sm:w-auto"
           >
             Close
           </button>

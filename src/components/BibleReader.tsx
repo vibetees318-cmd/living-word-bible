@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bookmark, BookmarkCheck, Copy, Share2, Volume2, Sparkles, Check, Wifi, Globe2 } from 'lucide-react';
+import { Bookmark, BookmarkCheck, Copy, Share2, Volume2, Sparkles, Check, Wifi, Globe2, Type, Sun, Moon, BookOpen } from 'lucide-react';
 import { ChapterData, Verse, UI_TRANSLATIONS, BIBLE_BOOKS, LanguageCode } from '../data/bibleData';
 import { getVerseNativeText } from '../services/bibleApi';
 
@@ -11,6 +11,9 @@ interface BibleReaderProps {
   fontFamily: 'cormorant' | 'lora';
   bookmarkedVerseKeys: Set<string>;
   isLoading?: boolean;
+  theme?: 'parchment' | 'alabaster' | 'night';
+  setTheme?: (theme: 'parchment' | 'alabaster' | 'night') => void;
+  setFontSize?: (size: 'small' | 'medium' | 'large' | 'xlarge') => void;
   onSelectVerse: (verseIndex: number, textToSpeak: string) => void;
   onToggleBookmark: (verse: Verse, book: string, chapter: number) => void;
   onShareVerse: (verse: Verse, book: string, chapter: number) => void;
@@ -24,6 +27,9 @@ export const BibleReader: React.FC<BibleReaderProps> = ({
   fontFamily,
   bookmarkedVerseKeys,
   isLoading = false,
+  theme = 'parchment',
+  setTheme,
+  setFontSize,
   onSelectVerse,
   onToggleBookmark,
   onShareVerse
@@ -95,17 +101,23 @@ export const BibleReader: React.FC<BibleReaderProps> = ({
     );
   }
 
+  const readerThemeClasses = {
+    parchment: 'bg-[#FDFBF7] text-[#1C1917] border-[#E3DAC8]',
+    night: 'bg-[#181512] text-[#EDE4D5] border-[#383025]',
+    alabaster: 'bg-[#FFFFFF] text-[#111111] border-[#E4E4E2]'
+  }[theme];
+
   return (
-    <article className="w-full max-w-4xl mx-auto bg-[#FDFBF7] rounded-2xl border border-[#E3DAC8] shadow-sm p-6 sm:p-10 transition-all">
+    <article className={`w-full max-w-4xl mx-auto rounded-2xl border shadow-sm p-6 sm:p-10 transition-all ${readerThemeClasses}`}>
       {/* Chapter Title Banner with Curatorial Editorial Header */}
-      <div className="text-center pb-8 mb-8 border-b border-[#EAE3D2] relative">
+      <div className="text-center pb-6 mb-6 border-b border-current/15 relative">
         <div className="flex items-center justify-center gap-2 mb-2 text-xs font-sans-ui uppercase tracking-widest text-[#8A795D] font-bold">
           <span>{chapterData.testament === 'Old' ? t.oldTestament : t.newTestament}</span>
           <span>·</span>
           <span>{t.chapter} {chapterData.chapter}</span>
         </div>
 
-        <h1 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-[#1C1917] tracking-tight">
+        <h1 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">
           {formalBookTitle}
         </h1>
 
@@ -120,13 +132,111 @@ export const BibleReader: React.FC<BibleReaderProps> = ({
         </div>
 
         {/* Small divine cross ornament */}
-        <div className="flex items-center justify-center gap-3 mt-4 text-[#C5A028]">
+        <div className="flex items-center justify-center gap-3 mt-3 text-[#C5A028]">
           <span className="w-12 h-[1px] bg-[#D4AF37]/40" />
           <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
             <path d="M11 2h2v6h6v2h-6v12h-2V10H5V8h6V2z" />
           </svg>
           <span className="w-12 h-[1px] bg-[#D4AF37]/40" />
         </div>
+
+        {/* Reader Settings Toolbar: Font Size (Small, Medium, Large) & 3 Themes (Parchment Gold, Night Dark, Clean White) */}
+        {(setFontSize || setTheme) && (
+          <div className="mt-5 pt-4 border-t border-current/15 flex flex-wrap items-center justify-between gap-3 text-xs">
+            {/* Font Size Adjusting Controls */}
+            {setFontSize && (
+              <div className="flex items-center gap-2">
+                <span className="font-sans-ui text-[11px] font-semibold opacity-70 flex items-center gap-1">
+                  <Type className="w-3.5 h-3.5 text-[#C5A028]" />
+                  <span>Font Size:</span>
+                </span>
+                <div className="inline-flex rounded-lg p-0.5 bg-black/5 dark:bg-white/10 border border-current/15">
+                  <button
+                    onClick={() => setFontSize('small')}
+                    className={`px-2.5 py-1 rounded text-xs font-semibold transition-all cursor-pointer ${
+                      fontSize === 'small'
+                        ? 'bg-[#D4AF37] text-[#1C1917] shadow-xs'
+                        : 'opacity-70 hover:opacity-100'
+                    }`}
+                    title="Small Font Size"
+                  >
+                    Small
+                  </button>
+                  <button
+                    onClick={() => setFontSize('medium')}
+                    className={`px-2.5 py-1 rounded text-xs font-semibold transition-all cursor-pointer ${
+                      fontSize === 'medium'
+                        ? 'bg-[#D4AF37] text-[#1C1917] shadow-xs'
+                        : 'opacity-70 hover:opacity-100'
+                    }`}
+                    title="Medium Font Size"
+                  >
+                    Medium
+                  </button>
+                  <button
+                    onClick={() => setFontSize('large')}
+                    className={`px-2.5 py-1 rounded text-xs font-semibold transition-all cursor-pointer ${
+                      fontSize === 'large' || fontSize === 'xlarge'
+                        ? 'bg-[#D4AF37] text-[#1C1917] shadow-xs'
+                        : 'opacity-70 hover:opacity-100'
+                    }`}
+                    title="Large Font Size"
+                  >
+                    Large
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* 3 Reading Themes (Parchment Gold, Night Dark, Clean White) */}
+            {setTheme && (
+              <div className="flex items-center gap-2">
+                <span className="font-sans-ui text-[11px] font-semibold opacity-70 flex items-center gap-1">
+                  <Sun className="w-3.5 h-3.5 text-[#C5A028]" />
+                  <span>Reading Theme:</span>
+                </span>
+                <div className="inline-flex rounded-lg p-0.5 bg-black/5 dark:bg-white/10 border border-current/15">
+                  <button
+                    onClick={() => setTheme('parchment')}
+                    className={`px-2.5 py-1 rounded text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                      theme === 'parchment'
+                        ? 'bg-[#D4AF37] text-[#1C1917] font-bold shadow-xs'
+                        : 'opacity-70 hover:opacity-100'
+                    }`}
+                    title="Parchment Gold"
+                  >
+                    <span>📜</span>
+                    <span className="hidden sm:inline">Parchment Gold</span>
+                  </button>
+                  <button
+                    onClick={() => setTheme('night')}
+                    className={`px-2.5 py-1 rounded text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                      theme === 'night'
+                        ? 'bg-[#D4AF37] text-[#1C1917] font-bold shadow-xs'
+                        : 'opacity-70 hover:opacity-100'
+                    }`}
+                    title="Night Dark"
+                  >
+                    <span>🌙</span>
+                    <span className="hidden sm:inline">Night Dark</span>
+                  </button>
+                  <button
+                    onClick={() => setTheme('alabaster')}
+                    className={`px-2.5 py-1 rounded text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                      theme === 'alabaster'
+                        ? 'bg-[#D4AF37] text-[#1C1917] font-bold shadow-xs'
+                        : 'opacity-70 hover:opacity-100'
+                    }`}
+                    title="Clean White"
+                  >
+                    <span>⚪</span>
+                    <span className="hidden sm:inline">Clean White</span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Verse-by-Verse Interactive Display */}
@@ -138,17 +248,23 @@ export const BibleReader: React.FC<BibleReaderProps> = ({
           const isBookmarked = bookmarkedVerseKeys.has(verseKey);
           const verseText = getVerseText(verse);
 
+          const verseHighlightClasses = isActivelyRecited
+            ? theme === 'night'
+              ? 'bg-[#2A2318] border border-[#D4AF37] shadow-sm ring-1 ring-[#D4AF37]/50'
+              : 'bg-[#FAF3DC] border border-[#D4AF37] shadow-sm ring-1 ring-[#D4AF37]/40'
+            : isSelected
+            ? theme === 'night'
+              ? 'bg-[#221D17] border border-[#44392B]'
+              : 'bg-[#F7F2E6] border border-[#DDD3BF]'
+            : theme === 'night'
+            ? 'hover:bg-[#221D18] border border-transparent'
+            : 'hover:bg-[#FAF7F0] border border-transparent';
+
           return (
             <div
               key={verse.verseNumber}
               onClick={() => handleVerseClick(verse, index)}
-              className={`group relative p-3.5 sm:p-4 rounded-xl transition-all duration-300 cursor-pointer ${
-                isActivelyRecited
-                  ? 'bg-[#FAF3DC] border border-[#D4AF37] shadow-sm ring-1 ring-[#D4AF37]/40'
-                  : isSelected
-                  ? 'bg-[#F7F2E6] border border-[#DDD3BF]'
-                  : 'hover:bg-[#FAF7F0] border border-transparent'
-              }`}
+              className={`group relative p-3.5 sm:p-4 rounded-xl transition-all duration-300 cursor-pointer ${verseHighlightClasses}`}
             >
               <div className="flex items-start gap-3 sm:gap-4">
                 {/* Verse Number in Tabular Figures */}

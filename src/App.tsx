@@ -15,6 +15,9 @@ import { AudioSettingsView } from './components/AudioSettingsView';
 import { BibleVideosView } from './components/BibleVideosView';
 import { VerseShareModal } from './components/VerseShareModal';
 import { AboutDeveloperModal } from './components/AboutDeveloperModal';
+import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
+import { RateAppModal } from './components/RateAppModal';
+import { SplashScreen } from './components/SplashScreen';
 import { Footer } from './components/Footer';
 import { BottomNav } from './components/BottomNav';
 import { BIBLE_BOOKS, getChapterContent, Verse, ChapterData, LanguageCode, JESUS_AVATAR_IMAGE_URL } from './data/bibleData';
@@ -102,6 +105,10 @@ export default function App() {
 
   // About Developer Modal State
   const [aboutDeveloperOpen, setAboutDeveloperOpen] = useState(false);
+
+  // Compliance & Support Modal States (Play Store Ready)
+  const [privacyPolicyOpen, setPrivacyPolicyOpen] = useState(false);
+  const [rateAppOpen, setRateAppOpen] = useState(false);
 
   // Initialize Speech Engine Controller
   const speechControllerRef = useRef<BibleSpeechController | null>(null);
@@ -372,6 +379,9 @@ export default function App() {
         setLanguage={setLanguage}
         onSelectBookAndChapter={handleSelectBookAndChapter}
         onOpenAboutDeveloper={() => setAboutDeveloperOpen(true)}
+        onOpenPrivacyPolicy={() => setPrivacyPolicyOpen(true)}
+        onOpenRateApp={() => setRateAppOpen(true)}
+        bookmarksCount={bookmarks.length}
       />
 
       {/* Main Responsive Content Area */}
@@ -414,7 +424,10 @@ export default function App() {
               activeVerseIndex={activeVerseIndex}
               language={language}
               fontSize={fontSize}
+              setFontSize={setFontSize}
               fontFamily={fontFamily}
+              theme={theme}
+              setTheme={setTheme}
               bookmarkedVerseKeys={bookmarkedKeys}
               isLoading={isLoadingChapter}
               onSelectVerse={handleSelectVerse}
@@ -501,6 +514,21 @@ export default function App() {
         isOpen={aboutDeveloperOpen}
         onClose={() => setAboutDeveloperOpen(false)}
       />
+
+      {/* Play Store Compliance - Privacy Policy & Terms Modal */}
+      <PrivacyPolicyModal
+        isOpen={privacyPolicyOpen}
+        onClose={() => setPrivacyPolicyOpen(false)}
+      />
+
+      {/* Play Store Rating & User Feedback Modal */}
+      <RateAppModal
+        isOpen={rateAppOpen}
+        onClose={() => setRateAppOpen(false)}
+      />
+
+      {/* Smooth 1.5-second Catholic Gold Splash Screen on App Launch */}
+      <SplashScreen />
 
       {/* Responsive Bottom Navigation Bar for Mobile */}
       <BottomNav
